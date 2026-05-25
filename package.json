@@ -1,0 +1,43 @@
+{
+  "name": "aula-slide-player",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "app": "npm run build && LIBVA_DRIVER_NAME=dummy ELECTRON_DISABLE_GPU=1 electron --disable-gpu --disable-gpu-compositing --disable-accelerated-video-decode --disable-accelerated-video-encode --disable-features=VaapiVideoDecoder,VaapiVideoEncoder,UseChromeOSDirectVideoDecoder .",
+    "dist": "npm run build && electron-builder --linux AppImage --x64"
+  },
+  "build": {
+    "appId": "com.local.aulaslides",
+    "productName": "Aulas com Slides",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Education"
+    }
+  },
+  "dependencies": {
+    "docx": "^9.6.1",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.2.1",
+    "pdfjs-dist": "^5.3.31",
+    "vite": "^6.3.5"
+  },
+  "devDependencies": {
+    "electron": "^42.2.0",
+    "electron-builder": "^26.8.1"
+  }
+}
